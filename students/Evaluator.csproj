@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,16 +33,18 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Establishment\Activities\Appreciation.cs" />
+    <Compile Include="Establishment\Activities\Course.cs" />
+    <Compile Include="Establishment\Activities\Evaluation.cs" />
+    <Compile Include="Establishment\Activities\Grade.cs" />
+    <Compile Include="Establishment\Entities\Person.cs" />
+    <Compile Include="Establishment\Entities\Teacher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activity.cs" />
     <Compile Include="Entities.cs" />
+    <Compile Include="Establishment\School.cs" />
+    <Compile Include="Establishment\Entities\Student.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <None Include="students.csv" />
-    <None Include="teachers.csv" />
-    <None Include="activities.csv" />
-    <None Include="grades.csv" />
-  </ItemGroup>
 </Project>

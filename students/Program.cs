@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using Activities;
-using Entities;
 
-namespace students
+using Evaluator.Activities;
+using Evaluator.Entities;
+
+namespace Evaluator
 {
 	class MainClass
 	{
@@ -16,7 +17,7 @@ namespace students
 			List<Teacher> teachers = readTeachers ("../../teachers.csv");
 
 
-			List<Activity> activities = readActivity ("../../activities.csv", teachers);
+			List<Course> activities = readCourse ("../../activities.csv", teachers);
 
 			readGrades ("../../grades.csv", students, activities);
 
@@ -64,10 +65,10 @@ namespace students
 
 
 		// Function that reads the file at the given path and constructs a list of Activities
-		public static List<Activity> readActivity(string path, List<Teacher> teachers) {
+		public static List<Course> readCourse(string path, List<Teacher> teachers) {
 			string[] lines = System.IO.File.ReadAllLines(path);
 
-			List<Activity> activities = new List<Activity>();
+			List<Course> activities = new List<Course>();
 
 			foreach (string line in lines) {
 				List<string> elems = line.Split(',').Select(elem => elem.Trim() ).ToList<string>();
@@ -76,7 +77,7 @@ namespace students
 				// A predicate is a function given to Find that returns a boolean (true or false)
 				// In this case the predicate is `t => t.LastName == elems[2]` and returns true when
 				// the LastName property of the element t of type Teacher is equal to the third element of the line
-				activities.Add(new Activity(elems[0], elems[1], teachers.Find(t => t.LastName == elems[2]), Int32.Parse(elems[3])));
+				activities.Add(new Course(elems[0], elems[1], teachers.Find(t => t.LastName == elems[2]), Int32.Parse(elems[3])));
 			}
 
 			return activities;
@@ -84,7 +85,7 @@ namespace students
 
 
 		// Function that reads the file at the given path and adds grades to the students
-		public static void readGrades(string path, List<Student> students, List<Activity> activities) {
+		public static void readGrades(string path, List<Student> students, List<Course> activities) {
 			string[] lines = System.IO.File.ReadAllLines(path);
 
 			foreach (string line in lines) {
