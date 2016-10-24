@@ -12,20 +12,7 @@ namespace Evaluator
 	{
 		public static void Main (string[] args)
 		{
-			// Use the readX functions defined below to read the different csv files and construct lists
-			List<Student> students = readStudents ("../../students.csv");
-			List<Teacher> teachers = readTeachers ("../../teachers.csv");
-
-
-			List<Course> activities = readCourse ("../../activities.csv", teachers);
-
-			readGrades ("../../grades.csv", students, activities);
-
-			// Create a file for every student
-			foreach (Student student in students) {
-				File.WriteAllText("../../Bulletin-"+ student.LastName + "-" + student.FirstName +".txt", student.Bulletin());
-			}
-
+			EvaluatorApp.Run ();
 		}
 
 

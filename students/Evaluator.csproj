@@ -41,10 +41,9 @@
     <Compile Include="Establishment\Entities\Teacher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Activity.cs" />
-    <Compile Include="Entities.cs" />
-    <Compile Include="Establishment\School.cs" />
     <Compile Include="Establishment\Entities\Student.cs" />
+    <Compile Include="EvaluatorApp.cs" />
+    <Compile Include="Establishment\Establishment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
