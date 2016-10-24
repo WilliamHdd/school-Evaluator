@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evaluator.Activities
 {
+	[Serializable]
     public abstract class Evaluation
     {
         public Course Activity { get; set; }

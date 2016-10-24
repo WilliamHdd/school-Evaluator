@@ -8,6 +8,7 @@ using Evaluator.Entities;
 
 namespace Evaluator.Activities
 {
+	[Serializable]
     public class Course
     {
         public Teacher Teacher { get; set; }

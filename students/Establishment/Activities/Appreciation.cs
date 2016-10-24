@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evaluator.Activities
 {
+	[Serializable]
     public class Appreciation : Evaluation
     {
         private string appreciation;

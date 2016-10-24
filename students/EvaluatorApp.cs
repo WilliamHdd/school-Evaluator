@@ -2,6 +2,7 @@
 
 namespace Evaluator
 {
+	[Serializable]
 	public class EvaluatorApp
 	{
 		static private Establishment establishment;
@@ -54,6 +55,14 @@ namespace Evaluator
 
 		private static bool ImportEstablishment()
 		{
+			try{
+				EvaluatorApp.establishment = Establishment.import();
+			}
+
+			catch{
+
+				Console.WriteLine("An error has occured, please contact the creator of this app.");
+			}
 			return true;
 		}
 	}
