@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evaluator.Entities
 {
+	[Serializable]
     public class Teacher : Person
     {
 

@@ -8,6 +8,7 @@ using Evaluator.Activities;
 
 namespace Evaluator.Entities
 {
+	[Serializable]
     public class Student : Person
     {
         private List<Evaluation> evaluations;

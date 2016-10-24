@@ -8,6 +8,7 @@ using Evaluator.Entities;
 
 namespace Evaluator
 {
+	[Serializable]
 	class MainClass
 	{
 		public static void Main (string[] args)
