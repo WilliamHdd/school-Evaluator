@@ -27,6 +27,9 @@ namespace Evaluator
 				try {
 					choice = Int32.Parse (Console.ReadLine ()) - 1;
 					if (choice >= 0 && choice < this.options.Count) {
+						
+						Console.WriteLine ("");
+
 						if (options [choice].Item2 ()) {
 							break;
 						} else {

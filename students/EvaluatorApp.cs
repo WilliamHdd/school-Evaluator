@@ -29,7 +29,7 @@ namespace Evaluator
 		}
 
 		private static void MainMenu () {
-			Console.WriteLine ("What would you like to do?\n");
+			Console.WriteLine ("\nWhat would you like to do?\n");
 
 			Menu main_menu = new Menu ();
 			Menu student_menu = new Menu ();
@@ -37,7 +37,7 @@ namespace Evaluator
 			Menu course_menu = new Menu ();
 
 			student_menu
-				.add_option ("List students", EvaluatorApp.Dummy)
+				.add_option ("List students", EvaluatorApp.ListStudents)
 				.add_option ("Grades of student", EvaluatorApp.Dummy)
 				.add_option ("Add student", EvaluatorApp.Dummy)
 				.add_option ("Remove student", EvaluatorApp.Dummy);
@@ -77,6 +77,21 @@ namespace Evaluator
 
 				Console.WriteLine ("An error has occured, please contact the creator of this app.");
 			}
+			return true;
+		}
+
+		private static bool ListStudents () {
+			var students = EvaluatorApp.establishment.get_list_of_students();
+
+			if (students.Length == 0) {
+				Console.WriteLine ("There are no students to list yet...");
+				return true;
+			}
+
+			foreach (var student in students) {
+				Console.WriteLine (student);
+			}
+
 			return true;
 		}
 

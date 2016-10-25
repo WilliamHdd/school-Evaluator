@@ -24,8 +24,8 @@ namespace Evaluator.Entities
 			set;
 		}
 
-		public void DisplayName () {
-			Console.WriteLine (this.LastName + " " + this.FirstName);
+		public override string ToString() {
+			return this.LastName + " " + this.FirstName;
 		}
 	}
 }
