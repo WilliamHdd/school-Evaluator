@@ -27,5 +27,23 @@ namespace Evaluator.Entities
 		public override string ToString() {
 			return this.LastName + " " + this.FirstName;
 		}
+
+		public override bool Equals(Object obj) {
+			Person personObj = obj as Person; 
+
+			if (personObj == null) {
+				return false;
+			} else {
+				return this.FirstName == personObj.FirstName && this.LastName == personObj.LastName;
+			}
+		}
+
+		public override int GetHashCode() {
+			int hash = 13;
+			hash = (hash * 7) + this.LastName.GetHashCode();
+			hash = (hash * 7) + this.FirstName.GetHashCode();
+				
+			return hash;
+		}
 	}
 }

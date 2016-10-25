@@ -105,7 +105,10 @@ namespace Evaluator
 
 			var student = new Student (last_name, first_name);
 
-			EvaluatorApp.establishment.add_student (student);
+			if (!EvaluatorApp.establishment.add_student (student)) {
+				Console.WriteLine ("\nStudent \"" + student + "\" is already present...");
+				return true;
+			}
 
 			Console.WriteLine ("\nStudent \"" + student + "\" was added sucessfully");
 
