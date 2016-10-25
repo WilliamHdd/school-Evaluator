@@ -42,7 +42,7 @@ namespace Evaluator
 				.add_option ("List students", EvaluatorApp.ListStudents)
 				.add_option ("Grades of student", EvaluatorApp.Dummy)
 				.add_option ("Add student", EvaluatorApp.AddStudent)
-				.add_option ("Remove student", EvaluatorApp.Dummy);
+				.add_option ("Remove student", EvaluatorApp.RemoveStudent);
 
 			teacher_menu
 				.add_option ("List teachers", EvaluatorApp.Dummy)
@@ -86,7 +86,7 @@ namespace Evaluator
 			var students = EvaluatorApp.establishment.get_list_of_students();
 
 			if (students.Length == 0) {
-				Console.WriteLine ("There are no students to list yet...");
+				Console.WriteLine ("There are no students to list...");
 				return true;
 			}
 
@@ -113,6 +113,25 @@ namespace Evaluator
 			Console.WriteLine ("\nStudent \"" + student + "\" was added sucessfully");
 
 			return true;
+		}
+
+		private static bool RemoveStudent() {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine ();
+			Console.Write ("First name: ");
+			var first_name = Console.ReadLine ();
+
+			var student = new Student (last_name, first_name);
+
+			if (!EvaluatorApp.establishment.remove_student (student)) {
+				Console.WriteLine ("\nStudent \"" + student + "\" could not be found...");
+				return true;
+			}
+
+			Console.WriteLine ("\nStudent \"" + student + "\" was removed sucessfully");
+
+			return true;
+
 		}
 
 		private static bool Exit() {
