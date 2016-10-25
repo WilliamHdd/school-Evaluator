@@ -44,6 +44,7 @@
     <Compile Include="Establishment\Entities\Student.cs" />
     <Compile Include="EvaluatorApp.cs" />
     <Compile Include="Establishment\Establishment.cs" />
+    <Compile Include="Menu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
