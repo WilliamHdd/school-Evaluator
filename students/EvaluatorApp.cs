@@ -162,6 +162,26 @@ namespace Evaluator
 			return true;
 		}
 
+		private static bool AddCourse() {
+
+			Console.Write("Name: ");
+			var name = Console.Read();
+			Console.Write("Number of ECTS: ");
+			var ects = Console.Read();
+			Console.Write("Code: ");
+			var code = Console.Read();
+			Console.Write("Teacher:");
+			var teacher = Console.Read();
+
+			if (teacher in //set of teacher){
+
+
+			    }
+		
+		
+		
+		}
+
 		private static bool Exit() {
 			EvaluatorApp.run = false;
 			return true;
