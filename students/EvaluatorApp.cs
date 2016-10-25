@@ -10,203 +10,222 @@ namespace Evaluator
 		static private Establishment establishment;
 		static private bool run = true;
 
-		public static void Run () {
-			EvaluatorApp.InitMenu ();
+		public static void Run() {
+			EvaluatorApp.InitMenu();
 			while (EvaluatorApp.run) {
-				EvaluatorApp.MainMenu ();
+				EvaluatorApp.MainMenu();
 			}
 		}
 
-		private static void InitMenu () {
+		private static void InitMenu() {
 
-			Console.WriteLine ("Welcome, would you like to create a new establishment or import an existing one (from file)\n");
+			Console.WriteLine("Welcome, would you like to create a new establishment or import an existing one (from file)\n");
 
-			Menu init_menu = new Menu ();
+			Menu init_menu = new Menu();
 
 			init_menu
-				.add_option ("Create new", EvaluatorApp.NewEstablishment)
-				.add_option ("Import", EvaluatorApp.ImportEstablishment);
+				.add_option("Create new", EvaluatorApp.NewEstablishment)
+				.add_option("Import", EvaluatorApp.ImportEstablishment);
 
-			init_menu.Run ();
+			init_menu.Run();
 		}
 
-		private static void MainMenu () {
-			Console.WriteLine ("\nWhat would you like to do?\n");
+		private static void MainMenu() {
+			Console.WriteLine("\nWhat would you like to do?\n");
 
-			Menu main_menu = new Menu ();
-			Menu student_menu = new Menu ();
-			Menu teacher_menu = new Menu ();
-			Menu course_menu = new Menu ();
+			Menu main_menu = new Menu();
+			Menu student_menu = new Menu();
+			Menu teacher_menu = new Menu();
+			Menu course_menu = new Menu();
 
 			student_menu
-				.add_option ("List students", EvaluatorApp.ListStudents)
-				.add_option ("Grades of student", EvaluatorApp.Dummy)
-				.add_option ("Add student", EvaluatorApp.AddStudent)
-				.add_option ("Remove student", EvaluatorApp.RemoveStudent);
+				.add_option("List students", EvaluatorApp.ListStudents)
+				.add_option("Grades of student", EvaluatorApp.Dummy)
+				.add_option("Add student", EvaluatorApp.AddStudent)
+				.add_option("Remove student", EvaluatorApp.RemoveStudent);
 
 			teacher_menu
-				.add_option ("List teachers", EvaluatorApp.ListTeacher)
-				.add_option ("Add teacher", EvaluatorApp.AddTeacher)
-				.add_option ("Remove teacher", EvaluatorApp.Dummy);
+				.add_option("List teachers", EvaluatorApp.ListTeacher)
+				.add_option("Add teacher", EvaluatorApp.AddTeacher)
+				.add_option("Remove teacher", EvaluatorApp.Dummy);
 
 			course_menu
-				.add_option ("List courses", EvaluatorApp.Dummy)
-				.add_option ("Add course", EvaluatorApp.Dummy)
-				.add_option ("Remove course", EvaluatorApp.Dummy)
-				.add_option ("Students signed up for a course", EvaluatorApp.Dummy)
-				.add_option ("Statistics for a course", EvaluatorApp.Dummy);
-			
-			main_menu
-				.add_option ("Manage students", student_menu.Run)
-				.add_option ("Manage teachers", teacher_menu.Run)
-				.add_option ("Manage courses", course_menu.Run)
-				.add_option ("Exit", EvaluatorApp.Exit);
+				.add_option("List courses", EvaluatorApp.Dummy)
+				.add_option("Add course", EvaluatorApp.Dummy)
+				.add_option("Remove course", EvaluatorApp.Dummy)
+				.add_option("Students signed up for a course", EvaluatorApp.Dummy)
+				.add_option("Statistics for a course", EvaluatorApp.Dummy);
 
-			main_menu.Run ();
+			main_menu
+				.add_option("Manage students", student_menu.Run)
+				.add_option("Manage teachers", teacher_menu.Run)
+				.add_option("Manage courses", course_menu.Run)
+				.add_option("Exit", EvaluatorApp.Exit);
+
+			main_menu.Run();
 		}
 
-		private static bool NewEstablishment () {
-			Console.WriteLine ("What is the establishments name?");
-			string name = Console.ReadLine ();
-			EvaluatorApp.establishment = new Establishment (name);
+		private static bool NewEstablishment() {
+			Console.WriteLine("What is the establishments name?");
+			string name = Console.ReadLine();
+			EvaluatorApp.establishment = new Establishment(name);
 			return true;
 		}
 
-		private static bool ImportEstablishment () {
+		private static bool ImportEstablishment() {
 			try {
-				EvaluatorApp.establishment = Establishment.import ();
+				EvaluatorApp.establishment = Establishment.import();
 			} catch {
 
-				Console.WriteLine ("An error has occured, please contact the creator of this app.");
+				Console.WriteLine("An error has occured, please contact the creator of this app.");
 			}
 			return true;
 		}
 
-		private static bool ListStudents () {
-			var students = EvaluatorApp.establishment.get_list_of_students ();
+		private static bool ListStudents() {
+			var students = EvaluatorApp.establishment.get_list_of_students();
 
 			if (students.Length == 0) {
-				Console.WriteLine ("There are no students to list...");
+				Console.WriteLine("There are no students to list...");
 				return true;
 			}
 
 			foreach (var student in students) {
-				Console.WriteLine (student);
+				Console.WriteLine(student);
 			}
 
 			return true;
 		}
 
-		private static bool ListTeacher () {
+		private static bool ListTeacher() {
 
-			var teachers = EvaluatorApp.establishment.get_list_of_teachers ();
+			var teachers = EvaluatorApp.establishment.get_list_of_teachers();
 
 			if (teachers.Length == 0) {
-				Console.WriteLine ("There are no teachers to list yet...");
+				Console.WriteLine("There are no teachers to list yet...");
 				return true;
 			}
 			foreach (var teacher in teachers) {
-				Console.WriteLine (teacher);
+				Console.WriteLine(teacher);
 
 			}
 			return true;
 		}
 
-		private static bool AddStudent () {
-			Console.Write ("Last name: ");
-			var last_name = Console.ReadLine ();
-			Console.Write ("First name: ");
-			var first_name = Console.ReadLine ();
+		private static bool AddStudent() {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine();
+			Console.Write("First name: ");
+			var first_name = Console.ReadLine();
 
-			var student = new Student (last_name, first_name);
+			var student = new Student(last_name, first_name);
 
-			if (!EvaluatorApp.establishment.add_student (student)) {
-				Console.WriteLine ("\nStudent \"" + student + "\" is already present...");
+			if (!EvaluatorApp.establishment.add_student(student)) {
+				Console.WriteLine("\nStudent \"" + student + "\" is already present...");
 				return true;
 			}
 
-			Console.WriteLine ("\nStudent \"" + student + "\" was added sucessfully");
+			Console.WriteLine("\nStudent \"" + student + "\" was added sucessfully");
 
 			return true;
 		}
 
 
-		private static bool RemoveStudent () {
-			Console.Write ("Last name: ");
-			var last_name = Console.ReadLine ();
-			Console.Write ("First name: ");
-			var first_name = Console.ReadLine ();
+		private static bool RemoveStudent() {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine();
+			Console.Write("First name: ");
+			var first_name = Console.ReadLine();
 
-			var student = new Student (last_name, first_name);
+			var student = new Student(last_name, first_name);
 
-			if (!EvaluatorApp.establishment.remove_student (student)) {
-				Console.WriteLine ("\nStudent \"" + student + "\" could not be found...");
+			if (!EvaluatorApp.establishment.remove_student(student)) {
+				Console.WriteLine("\nStudent \"" + student + "\" could not be found...");
 				return true;
 			}
 
-			Console.WriteLine ("\nStudent \"" + student + "\" was removed sucessfully");
+			Console.WriteLine("\nStudent \"" + student + "\" was removed sucessfully");
 
 			return true;
 		}
 
 
-		private static bool AddTeacher () {
-			Console.Write ("Last name: ");
-			var last_name = Console.ReadLine ();
-			Console.Write ("First name: ");
-			var first_name = Console.ReadLine ();
-			Console.Write ("Salary: ");
+		private static bool AddTeacher() {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine();
+			Console.Write("First name: ");
+			var first_name = Console.ReadLine();
+			Console.Write("Salary: ");
 			int salary;
 			while (true) {
 				int trySalary;
 
 				try {
-					trySalary = Int32.Parse (Console.ReadLine ());
+					trySalary = Int32.Parse(Console.ReadLine());
 					if (trySalary > 0) {
 
 						salary = trySalary;
 						break;
 					} else {
-						Console.WriteLine ("Please enter a possitif integer as salary.");
+						Console.WriteLine("Please enter a possitif integer as salary.");
 					}
 				} catch {
-					Console.WriteLine ("Please enter an integer as salary.");
+					Console.WriteLine("Please enter an integer as salary.");
 				}
 			}
-			var teacher = new Teacher (last_name, first_name, salary);
+			var teacher = new Teacher(last_name, first_name, salary);
 
-			EvaluatorApp.establishment.add_teacher (teacher);
+			EvaluatorApp.establishment.add_teacher(teacher);
 
-			Console.WriteLine ("\nTeacher \"" + teacher + "\" was added successfully");
+			Console.WriteLine("\nTeacher \"" + teacher + "\" was added successfully");
 			return true;
 		}
 
 		private static bool AddCourse() {
 
 			Console.Write("Name: ");
-			var name = Console.Read();
+			var name = Console.ReadLine();
 			Console.Write("Number of ECTS: ");
-			var ects = Console.Read();
+			var ects = Console.ReadLine();
 			Console.Write("Code: ");
 			var code = Console.Read();
-			Console.Write("Teacher:");
-			var teacher = Console.Read();
+			Console.Write("Teacher's last name: ");
+			var teacherName = Console.ReadLine();
+			Console.Write("Teacher's first name: ");
+			var teacherFirstName = Console.ReadLine();
 
-			if (teacher in //set of teacher){
+			var teacher = new Teacher(teacherName, teacherFirstName);
+
+			//Does not work but doesn't know how to fix ....
+			// needs to look if the objet teacher declared above exists or not and if it does
+			// declare him as teacher of the course.
+			if (teacher in establishment.Teacher[]) {
+
+				Console.Write("frg");
+
+			} else {
+				Console.WriteLine("The name you gave does not exist. Would you like to create a new teacher ? (y/n) ");
+				string answer = Console.ReadLine();
+
+				if (answer == "y") {
+					EvaluatorApp.AddTeacher();
+				} else if (answer == "n") {
+					EvaluatorApp.Exit();
+				} else {
+					Console.WriteLine("Please choose between y or n ");
+				}
+			}
 
 
-			    }
-		
-		
-		
+
 		}
 
-		private static bool Exit () {
+		private static bool Exit() {
 			EvaluatorApp.run = false;
 			return true;
 		}
 
-		private static bool Dummy () {
+		private static bool Dummy() {
 			return true;
 		}
 	}
