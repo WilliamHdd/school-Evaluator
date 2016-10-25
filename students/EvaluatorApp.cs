@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Evaluator.Entities;
+
 namespace Evaluator
 {
 	[Serializable]
@@ -39,7 +41,7 @@ namespace Evaluator
 			student_menu
 				.add_option ("List students", EvaluatorApp.ListStudents)
 				.add_option ("Grades of student", EvaluatorApp.Dummy)
-				.add_option ("Add student", EvaluatorApp.Dummy)
+				.add_option ("Add student", EvaluatorApp.AddStudent)
 				.add_option ("Remove student", EvaluatorApp.Dummy);
 
 			teacher_menu
@@ -91,6 +93,21 @@ namespace Evaluator
 			foreach (var student in students) {
 				Console.WriteLine (student);
 			}
+
+			return true;
+		}
+
+		private static bool AddStudent () {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine ();
+			Console.Write ("First name: ");
+			var first_name = Console.ReadLine ();
+
+			var student = new Student (last_name, first_name);
+
+			EvaluatorApp.establishment.add_student (student);
+
+			Console.WriteLine ("\nStudent \"" + student + "\" was added sucessfully");
 
 			return true;
 		}
