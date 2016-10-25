@@ -16,7 +16,7 @@ namespace Evaluator
 				EvaluatorApp.MainMenu ();
 			}
 		}
-			
+
 		private static void InitMenu () {
 
 			Console.WriteLine ("Welcome, would you like to create a new establishment or import an existing one (from file)\n");
@@ -83,7 +83,7 @@ namespace Evaluator
 		}
 
 		private static bool ListStudents () {
-			var students = EvaluatorApp.establishment.get_list_of_students();
+			var students = EvaluatorApp.establishment.get_list_of_students ();
 
 			if (students.Length == 0) {
 				Console.WriteLine ("There are no students to list...");
@@ -96,25 +96,24 @@ namespace Evaluator
 
 			return true;
 		}
-		private static bool ListTeacher(){
 
-			var teachers = EvaluatorApp.establishment.get_list_of_teachers();
+		private static bool ListTeacher () {
 
-			if (teachers.Length == 0)
-			{
-				Console.WriteLine("There are no teachers to list yet...");
+			var teachers = EvaluatorApp.establishment.get_list_of_teachers ();
+
+			if (teachers.Length == 0) {
+				Console.WriteLine ("There are no teachers to list yet...");
 				return true;
 			}
-			foreach (var teacher in teachers)
-			{
-				Console.WriteLine(teacher);
+			foreach (var teacher in teachers) {
+				Console.WriteLine (teacher);
 
 			}
 			return true;
 		}
 
 		private static bool AddStudent () {
-			Console.Write("Last name: ");
+			Console.Write ("Last name: ");
 			var last_name = Console.ReadLine ();
 			Console.Write ("First name: ");
 			var first_name = Console.ReadLine ();
@@ -132,8 +131,8 @@ namespace Evaluator
 		}
 
 
-		private static bool RemoveStudent() {
-			Console.Write("Last name: ");
+		private static bool RemoveStudent () {
+			Console.Write ("Last name: ");
 			var last_name = Console.ReadLine ();
 			Console.Write ("First name: ");
 			var first_name = Console.ReadLine ();
@@ -149,43 +148,40 @@ namespace Evaluator
 
 			return true;
 		}
-			
 
-		private static bool AddTeacher() {
-			Console.Write("Last name: ");
-			var last_name = Console.ReadLine();
-			Console.Write("First name: ");
-			var first_name = Console.ReadLine();
-			Console.Write("Salary: ");
+
+		private static bool AddTeacher () {
+			Console.Write ("Last name: ");
+			var last_name = Console.ReadLine ();
+			Console.Write ("First name: ");
+			var first_name = Console.ReadLine ();
+			Console.Write ("Salary: ");
 			int salary;
-			while (true)
-			{
+			while (true) {
 				int trySalary;
 
-				try
-				{
-
-					trySalary = Int32.Parse(Console.ReadLine());
-					if (trySalary > 0)
-					{
+				try {
+					trySalary = Int32.Parse (Console.ReadLine ());
+					if (trySalary > 0) {
 
 						salary = trySalary;
 						break;
+					} else {
+						Console.WriteLine ("Please enter a possitif integer as salary.");
 					}
-
-					else { Console.WriteLine("Please enter a possitif integer as salary."); }
+				} catch {
+					Console.WriteLine ("Please enter an integer as salary.");
 				}
-				catch { Console.WriteLine("Please enter an integer as salary."); }
 			}
-			var teacher = new Teacher(last_name, first_name, salary);
+			var teacher = new Teacher (last_name, first_name, salary);
 
-			EvaluatorApp.establishment.add_teacher(teacher);
+			EvaluatorApp.establishment.add_teacher (teacher);
 
-			Console.WriteLine("\nTeacher \"" + teacher + "\" was added successfully");
+			Console.WriteLine ("\nTeacher \"" + teacher + "\" was added successfully");
 			return true;
 		}
 
-		private static bool Exit() {
+		private static bool Exit () {
 			EvaluatorApp.run = false;
 			return true;
 		}
