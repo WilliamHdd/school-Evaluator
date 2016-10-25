@@ -36,16 +36,28 @@ namespace Evaluator
 			return this.students.Add (s);
 		}
 
+		public bool remove_student (Student s) {
+			return this.students.Remove (s);
+		}
+
 		// Tries to add a teacher to the establishment
 		// returns false if the teacher is already present
 		public bool add_teacher (Teacher t) {
 			return this.teachers.Add (t);
 		}
 
+		public bool remove_teacher (Teacher t) {
+			return this.teachers.Remove (t);
+		}
+
 		// Tries to add a course
 		// returns false if the course is already present
 		public bool add_course (Course c) {
 			return this.courses.Add (c);
+		}
+
+		public bool remove_course (Course c) {
+			return this.courses.Remove (c);
 		}
 
 
