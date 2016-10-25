@@ -45,8 +45,8 @@ namespace Evaluator
 				.add_option ("Remove student", EvaluatorApp.Dummy);
 
 			teacher_menu
-				.add_option ("List teachers", EvaluatorApp.Dummy)
-				.add_option ("Add teacher", EvaluatorApp.Dummy)
+				.add_option ("List teachers", EvaluatorApp.ListTeacher)
+				.add_option ("Add teacher", EvaluatorApp.AddTeacher)
 				.add_option ("Remove teacher", EvaluatorApp.Dummy);
 
 			course_menu
@@ -96,6 +96,22 @@ namespace Evaluator
 
 			return true;
 		}
+		private static bool ListTeacher(){
+
+			var teachers = EvaluatorApp.establishment.get_list_of_teachers();
+
+			if (teachers.Length == 0)
+			{
+				Console.WriteLine("There are no teachers to list yet...");
+				return true;
+			}
+			foreach (var teacher in teachers)
+			{
+				Console.WriteLine(teacher);
+
+			}
+			return true;
+		}
 
 		private static bool AddStudent () {
 			Console.Write("Last name: ");
@@ -109,6 +125,40 @@ namespace Evaluator
 
 			Console.WriteLine ("\nStudent \"" + student + "\" was added sucessfully");
 
+			return true;
+		}
+
+		private static bool AddTeacher() {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine();
+			Console.Write("First name: ");
+			var first_name = Console.ReadLine();
+			Console.Write("Salary: ");
+			int salary;
+			while (true)
+			{
+				int trySalary;
+
+				try
+				{
+
+					trySalary = Int32.Parse(Console.ReadLine());
+					if (trySalary > 0)
+					{
+
+						salary = trySalary;
+						break;
+					}
+
+					else { Console.WriteLine("Please enter a possitif integer as salary."); }
+				}
+				catch { Console.WriteLine("Please enter an integer as salary."); }
+			}
+			var teacher = new Teacher(last_name, first_name, salary);
+
+			EvaluatorApp.establishment.add_teacher(teacher);
+
+			Console.WriteLine("\nTeacher \"" + teacher + "\" was added successfully");
 			return true;
 		}
 
