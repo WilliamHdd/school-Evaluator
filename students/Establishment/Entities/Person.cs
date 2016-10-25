@@ -7,29 +7,25 @@ using System.Threading.Tasks;
 namespace Evaluator.Entities
 {
 	[Serializable]
-    public class Person
-    {
-        public Person(string lastName, string firstName)
-        {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-        }
+	public class Person
+	{
+		public Person (string lastName, string firstName) {
+			this.FirstName = firstName;
+			this.LastName = lastName;
+		}
 
-        public string FirstName
-        {
-            get;
-            set;
-        }
+		public string FirstName {
+			get;
+			set;
+		}
 
-        public string LastName
-        {
-            get;
-            set;
-        }
+		public string LastName {
+			get;
+			set;
+		}
 
-        public void DisplayName()
-        {
-            Console.WriteLine(this.LastName + " " + this.FirstName);
-        }
-    }
+		public void DisplayName () {
+			Console.WriteLine (this.LastName + " " + this.FirstName);
+		}
+	}
 }

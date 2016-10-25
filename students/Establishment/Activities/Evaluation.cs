@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 namespace Evaluator.Activities
 {
 	[Serializable]
-    public abstract class Evaluation
-    {
-        public Course Activity { get; set; }
+	public abstract class Evaluation
+	{
+		public Course Activity { get; set; }
 
-        public Evaluation(Course activity)
-        {
-            this.Activity = activity;
-        }
+		public Evaluation (Course activity) {
+			this.Activity = activity;
+		}
 
-        public abstract int Note();
-    }
+		public abstract int Note ();
+	}
 
 }

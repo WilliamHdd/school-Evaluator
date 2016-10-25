@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 namespace Evaluator.Entities
 {
 	[Serializable]
-    public class Teacher : Person
-    {
+	public class Teacher : Person
+	{
 
-        public Teacher(string lastName, string firstName, int salary) : base(lastName, firstName)
-        {
-            this.Salary = salary;
-        }
+		public Teacher (string lastName, string firstName, int salary) : base (lastName, firstName) {
+			this.Salary = salary;
+		}
 
-        public int Salary
-        {
-            get;
-            set;
-        }
-    }
+		public int Salary {
+			get;
+			set;
+		}
+	}
 }
