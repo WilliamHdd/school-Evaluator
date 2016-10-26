@@ -19,14 +19,14 @@ namespace Evaluator
 		private string name;
 
 		private HashSet<Student> students;
-		private HashSet<Teacher> teachers;
+		private Dictionary<Teacher,Teacher> teachers;
 		private HashSet<Course> courses;
 
 		public Establishment(string name) {
 			this.name = name;
 
 			this.students = new HashSet<Student>();
-			this.teachers = new HashSet<Teacher>();
+			this.teachers = new Dictionary<Teacher, Teacher>();
 			this.courses = new HashSet<Course>();
 		}
 
@@ -43,11 +43,24 @@ namespace Evaluator
 		// Tries to add a teacher to the establishment
 		// returns false if the teacher is already present
 		public bool add_teacher(Teacher t) {
-			return this.teachers.Add(t);
+			if (this.teachers.ContainsKey(t)) {
+				return false;
+			}
+
+			this.teachers.Add(t,t);
+			return true;
 		}
 
 		public bool remove_teacher(Teacher t) {
 			return this.teachers.Remove(t);
+		}
+
+		public bool get_teacher(Teacher t) {
+			return this.teachers.TryGetValue(t, out t);
+		}
+
+		public bool contains_teacher(Teacher t) {
+			return this.teachers.ContainsKey(t);
 		}
 
 		// Tries to add a course
@@ -68,7 +81,7 @@ namespace Evaluator
 
 		// Copies the students to an array and returns the array
 		public Teacher[] get_list_of_teachers() {
-			return this.teachers.ToArray<Teacher>();
+			return this.teachers.Select(kv => kv.Value).ToArray<Teacher>();
 		}
 
 		// Copies the students to an array and returns the array

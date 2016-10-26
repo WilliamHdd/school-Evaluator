@@ -25,5 +25,9 @@ namespace Evaluator.Activities
 			this.ECTS = ects;
 			this.Teacher = teacher;
 		}
+		public override string ToString() {
+			return this.Name + " [" +this.Code + "] given by " + this.Teacher + " (" + this.ECTS + " ects) ";
+		}
+
 	}
 }
