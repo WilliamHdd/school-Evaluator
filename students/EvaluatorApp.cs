@@ -53,7 +53,7 @@ namespace Evaluator
 			course_menu
 				.add_option("List courses", EvaluatorApp.ListCourse)
 				.add_option("Add course", EvaluatorApp.AddCourse)
-				.add_option("Remove course", EvaluatorApp.Dummy)
+				.add_option("Remove course", EvaluatorApp.RemoveCourse)
 				.add_option("Students signed up for a course", EvaluatorApp.Dummy)
 				.add_option("Statistics for a course", EvaluatorApp.Dummy);
 
@@ -210,7 +210,7 @@ namespace Evaluator
 				Console.WriteLine("This teacher gives some courses, they will be removed as well...");
 
 				foreach (var course in teacher.Courses()) {
-					EvaluatorApp.RemoveCourse(course);
+					EvaluatorApp.RemoveCourse();
 				}
 			}
 
@@ -273,7 +273,21 @@ namespace Evaluator
 
 			return true;
 		}
-		private static bool RemoveCourse(Course course) { return true;}
+		private static bool RemoveCourse() {
+
+			Console.WriteLine("Course's code: ");
+			var code = Console.ReadLine();
+
+			if (!EvaluatorApp.establishment.remove_course(code)) {
+				Console.WriteLine("The course you want to erase could not be found...");
+				return true;
+			}
+
+			Console.WriteLine("The course has been sucessfuly removed");
+
+			return true;
+		}
+			
 
 
 		private static bool ListCourse() {
