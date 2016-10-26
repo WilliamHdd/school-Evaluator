@@ -22,84 +22,84 @@ namespace Evaluator
 		private HashSet<Teacher> teachers;
 		private HashSet<Course> courses;
 
-		public Establishment (string name) {
+		public Establishment(string name) {
 			this.name = name;
 
-			this.students = new HashSet<Student> ();
-			this.teachers = new HashSet<Teacher> ();
-			this.courses = new HashSet<Course> ();
+			this.students = new HashSet<Student>();
+			this.teachers = new HashSet<Teacher>();
+			this.courses = new HashSet<Course>();
 		}
 
 		// Tries to add a student to the establishment
 		// returns false if the student is already present
-		public bool add_student (Student s) {
-			return this.students.Add (s);
+		public bool add_student(Student s) {
+			return this.students.Add(s);
 		}
 
-		public bool remove_student (Student s) {
-			return this.students.Remove (s);
+		public bool remove_student(Student s) {
+			return this.students.Remove(s);
 		}
 
 		// Tries to add a teacher to the establishment
 		// returns false if the teacher is already present
-		public bool add_teacher (Teacher t) {
-			return this.teachers.Add (t);
+		public bool add_teacher(Teacher t) {
+			return this.teachers.Add(t);
 		}
 
-		public bool remove_teacher (Teacher t) {
-			return this.teachers.Remove (t);
+		public bool remove_teacher(Teacher t) {
+			return this.teachers.Remove(t);
 		}
 
 		// Tries to add a course
 		// returns false if the course is already present
-		public bool add_course (Course c) {
-			return this.courses.Add (c);
+		public bool add_course(Course c) {
+			return this.courses.Add(c);
 		}
 
-		public bool remove_course (Course c) {
-			return this.courses.Remove (c);
+		public bool remove_course(Course c) {
+			return this.courses.Remove(c);
 		}
 
 
 		// Copies the students to an array and returns the array
-		public Student[] get_list_of_students () {
-			return this.students.ToArray<Student> ();
+		public Student[] get_list_of_students() {
+			return this.students.ToArray<Student>();
 		}
 
 		// Copies the students to an array and returns the array
-		public Teacher[] get_list_of_teachers () {
-			return this.teachers.ToArray<Teacher> ();
+		public Teacher[] get_list_of_teachers() {
+			return this.teachers.ToArray<Teacher>();
 		}
 
 		// Copies the students to an array and returns the array
-		public Course[] get_list_of_courses () {
-			return this.courses.ToArray<Course> ();
+		public Course[] get_list_of_courses() {
+			return this.courses.ToArray<Course>();
 		}
 
 		// Imports all the data from a file
 		// This allows to import all the entries at once istead
 		// of having to encode them one by one
-		public static Establishment import () {
-			IFormatter formatter = new BinaryFormatter ();
-			Stream stream = new FileStream ("target.bin",
+		public static Establishment import() {
+			IFormatter formatter = new BinaryFormatter();
+			Stream stream = new FileStream("target.bin",
 				                FileMode.Open,
 				                FileAccess.Read,
 				                FileShare.Read);
-			Establishment Establishment = (Establishment)formatter.Deserialize (stream);
-			stream.Close ();
+			Establishment Establishment = (Establishment)formatter.Deserialize(stream);
+			stream.Close();
 			return Establishment;
 
 		}
 
 		// Exports all the data to a file
 		// This allows to make backups and use them later
-		public bool export () {
-			IFormatter formatter = new BinaryFormatter ();
-			Stream stream = new FileStream ("target.bin",
+		public bool export() {
+			IFormatter formatter = new BinaryFormatter();
+			Stream stream = new FileStream("target.bin",
 				                FileMode.Create,
 				                FileAccess.Write, FileShare.None);
-			formatter.Serialize (stream, this);
-			stream.Close ();
+			formatter.Serialize(stream, this);
+			stream.Close();
 			return false;
 		}
 	}

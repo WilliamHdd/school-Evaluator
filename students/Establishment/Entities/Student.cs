@@ -13,25 +13,25 @@ namespace Evaluator.Entities
 	{
 		private List<Evaluation> evaluations;
 
-		public Student (string lastName, string firstName) : base (lastName, firstName) {
-			this.evaluations = new List<Evaluation> ();
+		public Student(string lastName, string firstName) : base(lastName, firstName) {
+			this.evaluations = new List<Evaluation>();
 		}
 
-		public void Add (Evaluation eval) {
-			this.evaluations.Add (eval);
+		public void Add(Evaluation eval) {
+			this.evaluations.Add(eval);
 		}
 
 		// Returns the average of all the evaluations from all activities
-		public double Average () {
+		public double Average() {
 			var sum = 0;
 			foreach (var n in this.evaluations)
-				sum += n.Note ();
+				sum += n.Note();
 
 			return sum / this.evaluations.Count;
 		}
 
 		// Constructs a string representing the average score for each activity of the student
-		public string Bulletin () {
+		public string Bulletin() {
 
 			// The evaluations can be assigned to any activity and are not sorted
 			// We first need to sort them by activity to be able to take an average
@@ -39,16 +39,16 @@ namespace Evaluator.Entities
 			// representing the running sum of the scores for that activity and the number of evaluations.
 			// For each activity we check if it already exists in the dictionary, if it does we update the sum and number
 			// otherwise we add the activity
-			Dictionary<Course, Tuple<int, int>> gradesPerActivity = new Dictionary<Course, Tuple<int, int>> ();
+			Dictionary<Course, Tuple<int, int>> gradesPerActivity = new Dictionary<Course, Tuple<int, int>>();
 
 			foreach (var g in this.evaluations) {
 				// We try to access a given key in the dictionary, if it does not exist it will throw an exception
 				// and we know we have to add it to the dictionary.
 				try {
-					Tuple<int, int> t = gradesPerActivity [g.Activity];
-					gradesPerActivity [g.Activity] = new Tuple<int, int> (t.Item1 + g.Note (), t.Item2 + 1);
+					Tuple<int, int> t = gradesPerActivity[g.Activity];
+					gradesPerActivity[g.Activity] = new Tuple<int, int>(t.Item1 + g.Note(), t.Item2 + 1);
 				} catch (KeyNotFoundException) {
-					gradesPerActivity.Add (g.Activity, new Tuple<int, int> (g.Note (), 1));
+					gradesPerActivity.Add(g.Activity, new Tuple<int, int>(g.Note(), 1));
 				}
 			}
 

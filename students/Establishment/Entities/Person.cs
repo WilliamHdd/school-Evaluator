@@ -9,7 +9,7 @@ namespace Evaluator.Entities
 	[Serializable]
 	public class Person
 	{
-		public Person (string lastName, string firstName) {
+		public Person(string lastName, string firstName) {
 			this.FirstName = firstName;
 			this.LastName = lastName;
 		}

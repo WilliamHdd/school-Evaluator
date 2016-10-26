@@ -11,11 +11,11 @@ namespace Evaluator.Activities
 	{
 		public Course Activity { get; set; }
 
-		public Evaluation (Course activity) {
+		public Evaluation(Course activity) {
 			this.Activity = activity;
 		}
 
-		public abstract int Note ();
+		public abstract int Note();
 	}
 
 }

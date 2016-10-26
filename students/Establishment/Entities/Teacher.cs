@@ -10,7 +10,7 @@ namespace Evaluator.Entities
 	public class Teacher : Person
 	{
 
-		public Teacher (string lastName, string firstName, int salary) : base (lastName, firstName) {
+		public Teacher(string lastName, string firstName, int salary) : base(lastName, firstName) {
 			this.Salary = salary;
 
 
@@ -20,7 +20,5 @@ namespace Evaluator.Entities
 			get;
 			set;
 		}
-
-
 	}
 }

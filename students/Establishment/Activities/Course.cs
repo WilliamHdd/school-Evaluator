@@ -19,7 +19,7 @@ namespace Evaluator.Activities
 
 		public string Code { get; set; }
 
-		public Course (string name, string code, Teacher teacher, int ects) {
+		public Course(string name, string code, Teacher teacher, int ects) {
 			this.Name = name;
 			this.Code = code;
 			this.ECTS = ects;

@@ -11,11 +11,11 @@ namespace Evaluator.Activities
 	{
 		private string appreciation;
 
-		public Appreciation (Course activity, string appreciation) : base (activity) {
+		public Appreciation(Course activity, string appreciation) : base(activity) {
 			this.appreciation = appreciation;
 		}
 
-		public override int Note () {
+		public override int Note() {
 			// In the Appreciation class the grade is stored as a string (N, C, B, ...)
 			// But the Note method has to return the grade as an int, we use a switch statement
 			// to easily return the corresponding grade.
@@ -35,7 +35,7 @@ namespace Evaluator.Activities
 			}
 		}
 
-		public void setAppreciation (string appreciation) {
+		public void setAppreciation(string appreciation) {
 			this.appreciation = appreciation;
 		}
 	}

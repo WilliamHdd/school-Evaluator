@@ -4,7 +4,6 @@ using Evaluator.Entities;
 
 namespace Evaluator
 {
-	[Serializable]
 	public class EvaluatorApp
 	{
 		static private Establishment establishment;
