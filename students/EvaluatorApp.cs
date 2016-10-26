@@ -47,6 +47,7 @@ namespace Evaluator
 				.add_option("Grades of student", EvaluatorApp.ShowGradesOfStudent)
 				.add_option("Add student", EvaluatorApp.AddStudent)
 				.add_option("Remove student", EvaluatorApp.RemoveStudent)
+                .add_option("Create evaluation", EvaluatorApp.CreateEval)
 				.add_option("Back...", () => true, false);
 
 			teacher_menu
@@ -178,7 +179,7 @@ namespace Evaluator
 
 			var student = new Student(last_name, first_name);
 
-			if (!EvaluatorApp.establishment.get_student(student)) {
+			if (!EvaluatorApp.establishment.get_student(ref student)) {
 				Console.WriteLine("\nStudent \"" + student + "\" could not be found...");
 				return true;
 			}
@@ -229,7 +230,7 @@ namespace Evaluator
 
 			var teacher = new Teacher(last_name, first_name, 0);
 
-			if (!EvaluatorApp.establishment.get_teacher(teacher)) {
+			if (!EvaluatorApp.establishment.get_teacher(ref teacher)) {
 				Console.WriteLine("\nTeacher \"" + teacher + "\" could not be found...");
 				return true;
 			}
@@ -246,7 +247,7 @@ namespace Evaluator
 
 			return true;
 		}
-			
+
 		private static bool AddCourse() {
 
 			Console.Write("Name: ");
@@ -279,7 +280,7 @@ namespace Evaluator
 				}
 			}
 
-			if (EvaluatorApp.establishment.get_teacher(teacher)) {
+			if (EvaluatorApp.establishment.get_teacher(ref teacher)) {
 				var course = new Course(name, code, teacher, ects_ok);
 				EvaluatorApp.establishment.add_course(course);
 				teacher.Add(course);
@@ -313,7 +314,7 @@ namespace Evaluator
 
 			return true;
 		}
-			
+
 
 
 		private static bool ListCourse() {
@@ -330,6 +331,93 @@ namespace Evaluator
 			}
 			return true;
 		}
+
+		private static bool CreateEval() {
+
+			// Course
+			Console.Write("Course to be evaluated (code): ");
+			var code = Console.ReadLine();
+
+			var course = new Course("", "", null, 0);
+
+			if (!EvaluatorApp.establishment.get_course(code, out course)) {
+				Console.WriteLine("The course not be found...");
+				return true;
+			}
+
+			// Student
+			Console.Write("Student's last name: ");
+			var last_name = Console.ReadLine();
+
+			Console.Write("Student's first name: ");
+			var first_name = Console.ReadLine();
+
+			var student = new Student(last_name, first_name);
+
+			if (!EvaluatorApp.establishment.get_student(ref student)) {
+				Console.WriteLine("\n Student \"" + student + "\" could not be found...");
+				return true;
+			}
+
+
+			double max = 100;
+			double points = 0;
+			Grade grade;
+
+			while (true) {
+                Console.Write("Grade obtained by student: ");
+                string input = Console.ReadLine();
+
+				try {
+					points = Double.Parse(input);
+
+					if (points < 0) {
+						Console.WriteLine("Please enter possitif grade.");
+						continue;
+					}
+
+					while (true) {
+						Console.Write("Maximum points obtainable: ");
+
+						try {
+							max = Double.Parse(Console.ReadLine());
+
+							if (max < points) {
+								Console.WriteLine("Max grade can't be smaller than obtained grade.");
+								continue;
+							}
+
+							break;
+
+						} catch {
+							Console.WriteLine("Invalid input.");
+							continue;
+						}
+					}
+
+                    grade = new Grade(points, max);
+                    break;
+
+                    //It's a appreciation.
+                } catch {
+					try {
+						grade = new LetterGrade(input);
+                        break;
+					} catch {
+						Console.WriteLine("Invalid grade, use a number or the american grading system");
+                        continue;
+					}
+				}
+			}
+
+			EvaluatorApp.establishment.get_student(ref student);
+			student.AddEvaluation(course, grade);
+
+            Console.WriteLine(student.Bulletin());
+
+			return true;
+		}
+	
 
 		private static bool Exit() {
 			EvaluatorApp.run = false;

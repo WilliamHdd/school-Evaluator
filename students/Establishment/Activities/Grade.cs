@@ -22,5 +22,9 @@ namespace Evaluator.Activities
 		public double Points () {
             return points;
         }
-	}
+
+        public override string ToString() {
+            return this.points + "%";
+        }
+    }
 }
