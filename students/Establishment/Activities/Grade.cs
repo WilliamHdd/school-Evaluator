@@ -7,24 +7,20 @@ using System.Threading.Tasks;
 namespace Evaluator.Activities
 {
 	[Serializable]
-	public class Grade : Evaluation
+	public class Grade
 	{
-		private int grade;
+        protected double points;
 
-		public Grade(Course activity, int grade) : base(activity) {
-			this.grade = grade;
+		public Grade (double points, double max) {
+			if (points < 0 || max < 1 || max < points) {
+                throw new ArgumentException();
+            }
+
+            this.points = points * 100 / max;
 		}
 
-		public override int Note() {
-			return grade;
-		}
-
-		public void setNote(int grade) {
-			if (grade < 0) {
-				Console.WriteLine("A grade can't be negative");
-			}
-
-			this.grade = grade;
-		}
+		public double Points () {
+            return points;
+        }
 	}
 }

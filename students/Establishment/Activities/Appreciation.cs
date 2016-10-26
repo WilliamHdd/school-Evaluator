@@ -7,36 +7,52 @@ using System.Threading.Tasks;
 namespace Evaluator.Activities
 {
 	[Serializable]
-	public class Appreciation : Evaluation
+	public class LetterGrade : Grade
 	{
-		private string appreciation;
-
-		public Appreciation(Course activity, string appreciation) : base(activity) {
-			this.appreciation = appreciation;
-		}
-
-		public override int Note() {
-			// In the Appreciation class the grade is stored as a string (N, C, B, ...)
-			// But the Note method has to return the grade as an int, we use a switch statement
-			// to easily return the corresponding grade.
-			switch (this.appreciation) {
-				case "N":
-					return 20;
-				case "C":
-					return 16;
+		public LetterGrade(string letter_grade) : base(0, 100) {
+			switch (letter_grade) {
+				case "A+":
+					this.points = 97;
+					break;
+				case "A":
+					this.points = 94;
+					break;
+				case "A-":
+					this.points = 91;
+					break;
+				case "B+":
+					this.points = 88;
+					break;
 				case "B":
-					return 12;
-				case "TB":
-					return 8;
-				case "X":
-					return 4;
+					this.points = 84;
+					break;
+				case "B-":
+					this.points = 81;
+					break;
+				case "C+":
+					this.points = 78;
+					break;
+				case "C":
+					this.points = 74;
+					break;
+				case "C-":
+					this.points = 71;
+					break;
+				case "D+":
+					this.points = 68;
+					break;
+				case "D":
+					this.points = 64;
+					break;
+				case "D-":
+					this.points = 61;
+					break;
+				case "F":
+					this.points = 30;
+					break;
 				default:
-					return 0;
+					throw new ArgumentException();
 			}
-		}
-
-		public void setAppreciation(string appreciation) {
-			this.appreciation = appreciation;
 		}
 	}
 }

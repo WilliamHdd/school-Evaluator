@@ -11,23 +11,27 @@ namespace Evaluator.Entities
 	[Serializable]
 	public class Student : Person
 	{
-		private List<Evaluation> evaluations;
+        private Dictionary<Course, List<Grade>> grades;
 
-		public Student(string lastName, string firstName) : base(lastName, firstName) {
-			this.evaluations = new List<Evaluation>();
+		public Student (string lastName, string firstName) : base (lastName, firstName) {
+            this.grades = new Dictionary<Course, List<Grade>>();
 		}
 
-		public void Add(Evaluation eval) {
-			this.evaluations.Add(eval);
-		}
+        public void AddEvaluation(Course course, Grade eval) {
+            if (!this.grades.ContainsKey(course)) {
+                this.grades.Add(course, new List<Grade>());  
+            }
+
+            this.grades[course].Add(eval);
+        }
 
 		// Returns the average of all the evaluations from all activities
 		public double Average() {
 			var sum = 0;
-			foreach (var n in this.evaluations)
-				sum += n.Note();
 
-			return sum / this.evaluations.Count;
+            this.grades.Select(kv => kv.Value.Average(eval => eval.Point))
+				
+			return sum 
 		}
 
 		// Constructs a string representing the average score for each activity of the student

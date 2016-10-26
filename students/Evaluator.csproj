@@ -35,8 +35,6 @@
   <ItemGroup>
     <Compile Include="Establishment\Activities\Appreciation.cs" />
     <Compile Include="Establishment\Activities\Course.cs" />
-    <Compile Include="Establishment\Activities\Evaluation.cs" />
-    <Compile Include="Establishment\Activities\Grade.cs" />
     <Compile Include="Establishment\Entities\Person.cs" />
     <Compile Include="Establishment\Entities\Teacher.cs" />
     <Compile Include="Program.cs" />
@@ -45,6 +43,7 @@
     <Compile Include="EvaluatorApp.cs" />
     <Compile Include="Establishment\Establishment.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="Establishment\Activities\Grade.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
