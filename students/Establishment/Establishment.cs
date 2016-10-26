@@ -79,25 +79,27 @@ namespace Evaluator
 		// Imports all the data from a file
 		// This allows to import all the entries at once istead
 		// of having to encode them one by one
-		public static Establishment import() {
+		public static Establishment Import() {
 			IFormatter formatter = new BinaryFormatter();
-			Stream stream = new FileStream("target.bin",
+			Stream stream = new FileStream("data.evaluator",
 				                FileMode.Open,
 				                FileAccess.Read,
 				                FileShare.Read);
+			
 			Establishment Establishment = (Establishment)formatter.Deserialize(stream);
 			stream.Close();
 			return Establishment;
-
 		}
 
 		// Exports all the data to a file
 		// This allows to make backups and use them later
 		public bool export() {
 			IFormatter formatter = new BinaryFormatter();
-			Stream stream = new FileStream("target.bin",
+			Stream stream = new FileStream("data.evaluator",
 				                FileMode.Create,
-				                FileAccess.Write, FileShare.None);
+				                FileAccess.Write, 
+								FileShare.None);
+			
 			formatter.Serialize(stream, this);
 			stream.Close();
 			return false;

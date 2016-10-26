@@ -33,16 +33,16 @@ namespace Evaluator
 						if (options[choice].Item2()) {
 							break;
 						} else {
-							Console.WriteLine("Could not perform the operation... :'(");
+							Console.WriteLine("Could not perform the operation... :'(\n");
 						}
+					} else {
+						Console.WriteLine("Invalid choice...\n");
 					}
 				} catch (FormatException) {
-					// Do nothing, the range and parse error is handled at the same time below
+					Console.WriteLine("Invalid choice...\n");
 				}
-
-				Console.WriteLine("Invalid choice...");
 			}
-
+				
 			return true;
 		}
 	}

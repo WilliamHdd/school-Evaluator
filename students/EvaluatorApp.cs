@@ -59,6 +59,7 @@ namespace Evaluator
 				.add_option("Manage students", student_menu.Run)
 				.add_option("Manage teachers", teacher_menu.Run)
 				.add_option("Manage courses", course_menu.Run)
+				.add_option("Export data", EvaluatorApp.ExportEstablishment)
 				.add_option("Exit", EvaluatorApp.Exit);
 
 			main_menu.Run();
@@ -73,10 +74,20 @@ namespace Evaluator
 
 		private static bool ImportEstablishment() {
 			try {
-				EvaluatorApp.establishment = Establishment.import();
+				EvaluatorApp.establishment = Establishment.Import();
 			} catch {
+				Console.WriteLine("An error has occured, how unfortunate.");
+				return false;
+			}
+			return true;
+		}
 
-				Console.WriteLine("An error has occured, please contact the creator of this app.");
+		private static bool ExportEstablishment() {
+			try {
+				EvaluatorApp.establishment.export();
+			} catch {
+				Console.WriteLine("An error has occured, how unfortunate.");
+				return false;
 			}
 			return true;
 		}
@@ -180,7 +191,7 @@ namespace Evaluator
 			return true;
 		}
 
-		private static bool AddCourse() {
+		/*private static bool AddCourse() {
 
 			Console.Write("Name: ");
 			var name = Console.ReadLine();
@@ -217,7 +228,7 @@ namespace Evaluator
 
 
 
-		}
+		}*/
 
 		private static bool Exit() {
 			EvaluatorApp.run = false;
