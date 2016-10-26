@@ -43,7 +43,8 @@ namespace Evaluator
 				.add_option("List students", EvaluatorApp.ListStudents)
 				.add_option("Grades of student", EvaluatorApp.ShowGradesOfStudent)
 				.add_option("Add student", EvaluatorApp.AddStudent)
-				.add_option("Remove student", EvaluatorApp.RemoveStudent);
+				.add_option("Remove student", EvaluatorApp.RemoveStudent)
+				.add_option("Create evaluation", EvaluatorApp.CreateEval);
 
 			teacher_menu
 				.add_option("List teachers", EvaluatorApp.ListTeacher)
@@ -237,7 +238,7 @@ namespace Evaluator
 
 			return true;
 		}
-			
+
 		private static bool AddCourse() {
 
 			Console.Write("Name: ");
@@ -304,7 +305,7 @@ namespace Evaluator
 
 			return true;
 		}
-			
+
 
 
 		private static bool ListCourse() {
@@ -321,6 +322,87 @@ namespace Evaluator
 			}
 			return true;
 		}
+
+		private static bool CreateEval() {
+
+			// Course
+			Console.WriteLine("Course to be evaluated (code): ");
+			var code = Console.ReadLine();
+
+			var course = new Course("", "", null, 0);
+
+			if (!EvaluatorApp.establishment.get_course(code, out course)) {
+				Console.WriteLine("The course not be found...");
+				return true;
+			}
+
+			// Student
+			Console.WriteLine("Student's name to be evaluated: ");
+			var last_name = Console.ReadLine();
+
+			Console.WriteLine("Student's first name: ");
+			var first_name = Console.ReadLine();
+
+			var student = new Student(last_name, first_name);
+
+			if (!EvaluatorApp.establishment.get_student(student)) {
+				Console.WriteLine("\n Student \"" + student + "\" could not be found...");
+				return true;
+			}
+
+
+			double max = 100;
+			double points = 0;
+			Grade grade;
+
+			while (true) {
+				string input = Console.ReadLine();
+
+				try {
+					Console.WriteLine("Grade obtained by student: ");
+					points = Double.Parse(input);
+
+					if (points < 0) {
+						Console.WriteLine("Please enter possitif grade.");
+						continue;
+					}
+
+					while (true) {
+						Console.WriteLine("Maximum points obtainable: ");
+
+						try {
+							max = Double.Parse(Console.ReadLine());
+
+							if (max < points) {
+								Console.WriteLine("Max grade can't be smaller than obtained grade.");
+								continue;
+							}
+
+							break;
+
+						} catch {
+							Console.WriteLine("Invalid input.");
+							continue;
+						}
+
+						grade = new Grade(points, max);
+					}
+
+					//It's a appreciation.
+				} catch {
+					try {
+						grade = new LetterGrade(input);
+					} catch {
+						Console.WriteLine("Invalid grade, use a number or the american grading system");
+					}
+				}
+			}
+			EvaluatorApp.establishment.get_student(student);
+			student.AddEvaluation(course, grade);
+
+			return true;
+		}
+	
 
 		private static bool Exit() {
 			EvaluatorApp.run = false;

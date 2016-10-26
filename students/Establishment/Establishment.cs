@@ -91,6 +91,10 @@ namespace Evaluator
 			return this.courses.Remove(code);
 		}
 
+		public bool get_course(string code, out Course course) {
+			return this.courses.TryGetValue(code, out course);
+		}
+
 
 		// Copies the students to an array and returns the array
 		public Student[] get_list_of_students() {
