@@ -1,6 +1,8 @@
 ﻿using System;
 
 using Evaluator.Entities;
+using Evaluator.Activities;
+
 
 namespace Evaluator
 {
@@ -46,12 +48,12 @@ namespace Evaluator
 			teacher_menu
 				.add_option("List teachers", EvaluatorApp.ListTeacher)
 				.add_option("Add teacher", EvaluatorApp.AddTeacher)
-				.add_option("Remove teacher", EvaluatorApp.Dummy);
+				.add_option("Remove teacher", EvaluatorApp.RemoveTeacher);
 
 			course_menu
-				.add_option("List courses", EvaluatorApp.Dummy)
-				.add_option("Add course", EvaluatorApp.Dummy)
-				.add_option("Remove course", EvaluatorApp.Dummy)
+				.add_option("List courses", EvaluatorApp.ListCourse)
+				.add_option("Add course", EvaluatorApp.AddCourse)
+				.add_option("Remove course", EvaluatorApp.RemoveCourse)
 				.add_option("Students signed up for a course", EvaluatorApp.Dummy)
 				.add_option("Statistics for a course", EvaluatorApp.Dummy);
 
@@ -191,27 +193,69 @@ namespace Evaluator
 			return true;
 		}
 
-		/*private static bool AddCourse() {
+		private static bool RemoveTeacher() {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine();
+			Console.Write("First name: ");
+			var first_name = Console.ReadLine();
+
+			var teacher = new Teacher(last_name, first_name, 0);
+
+			if (!EvaluatorApp.establishment.get_teacher(teacher)) {
+				Console.WriteLine("\nTeacher \"" + teacher + "\" could not be found...");
+				return true;
+			}
+
+			if (teacher.Courses().Count > 0) {
+				Console.WriteLine("This teacher gives some courses, they will be removed as well...");
+
+				foreach (var course in teacher.Courses()) {
+					EvaluatorApp.RemoveCourse();
+				}
+			}
+
+			Console.WriteLine("Teacher \"" + teacher + "\" was removed sucessfully");
+
+			return true;
+		}
+
+
+		private static bool AddCourse() {
 
 			Console.Write("Name: ");
 			var name = Console.ReadLine();
-			Console.Write("Number of ECTS: ");
-			var ects = Console.ReadLine();
 			Console.Write("Code: ");
-			var code = Console.Read();
+			var code = Console.ReadLine();
 			Console.Write("Teacher's last name: ");
 			var teacherName = Console.ReadLine();
 			Console.Write("Teacher's first name: ");
 			var teacherFirstName = Console.ReadLine();
 
-			var teacher = new Teacher(teacherName, teacherFirstName);
+			var teacher = new Teacher(teacherName, teacherFirstName, 0);
 
-			//Does not work but doesn't know how to fix ....
-			// needs to look if the objet teacher declared above exists or not and if it does
-			// declare him as teacher of the course.
-			if (teacher in establishment.Teacher[]) {
+			Console.Write("Number of ECTS: ");
+			int ects_ok;
+			while (true) {
+				int ects;
 
-				Console.Write("frg");
+				try {
+					ects = Int32.Parse(Console.ReadLine());
+					if (ects > 0) {
+
+						ects_ok = ects;
+						break;
+					} else {
+						Console.WriteLine("Please enter a possitif integer as ECTS.");
+					}
+				} catch {
+					Console.WriteLine("Please enter an integer as ECTS.");
+				}
+			}
+
+			if (EvaluatorApp.establishment.get_teacher(teacher)) {
+				var course = new Course(name, code, teacher, ects_ok);
+				EvaluatorApp.establishment.add_course(course);
+				teacher.Add(course);
 
 			} else {
 				Console.WriteLine("The name you gave does not exist. Would you like to create a new teacher ? (y/n) ");
@@ -227,8 +271,40 @@ namespace Evaluator
 			}
 
 
+			return true;
+		}
+		private static bool RemoveCourse() {
 
-		}*/
+			Console.WriteLine("Course's code: ");
+			var code = Console.ReadLine();
+
+			if (!EvaluatorApp.establishment.remove_course(code)) {
+				Console.WriteLine("The course you want to erase could not be found...");
+				return true;
+			}
+
+			Console.WriteLine("The course has been sucessfuly removed");
+
+			return true;
+		}
+			
+
+
+		private static bool ListCourse() {
+
+			var courses = EvaluatorApp.establishment.get_list_of_courses();
+
+			if (courses.Length == 0) {
+				Console.WriteLine("There are no courses to list yet...");
+				return true;
+			}
+			foreach (var course in courses) {
+				Console.WriteLine(course);
+
+			}
+			return true;
+		}
+	
 
 		private static bool Exit() {
 			EvaluatorApp.run = false;
