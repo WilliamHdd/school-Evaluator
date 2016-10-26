@@ -27,41 +27,20 @@ namespace Evaluator.Entities
 
 		// Returns the average of all the evaluations from all activities
 		public double Average() {
-			var sum = 0;
 
-            this.grades.Select(kv => kv.Value.Average(eval => eval.Point))
-				
-			return sum 
+			return this.grades.Select(kv => kv.Value.Average(eval => eval.Points()))
+							  .Average();
 		}
 
 		// Constructs a string representing the average score for each activity of the student
 		public string Bulletin() {
 
-			// The evaluations can be assigned to any activity and are not sorted
-			// We first need to sort them by activity to be able to take an average
-			// For this we create a dictionary (hashmap) where the key is an activity and the value is a tuple of two integers
-			// representing the running sum of the scores for that activity and the number of evaluations.
-			// For each activity we check if it already exists in the dictionary, if it does we update the sum and number
-			// otherwise we add the activity
-			Dictionary<Course, Tuple<int, int>> gradesPerActivity = new Dictionary<Course, Tuple<int, int>>();
-
-			foreach (var g in this.evaluations) {
-				// We try to access a given key in the dictionary, if it does not exist it will throw an exception
-				// and we know we have to add it to the dictionary.
-				try {
-					Tuple<int, int> t = gradesPerActivity[g.Activity];
-					gradesPerActivity[g.Activity] = new Tuple<int, int>(t.Item1 + g.Note(), t.Item2 + 1);
-				} catch (KeyNotFoundException) {
-					gradesPerActivity.Add(g.Activity, new Tuple<int, int>(g.Note(), 1));
-				}
-			}
-
-			// We construct the string to print out, beginning with the name of the student on the first line
-			string bulletin = this.LastName + " " + this.FirstName + "\n";
+			var bulletin = "\nRapport: " + this + "\n\n"; 
 
 			// And a line for every activity with the code, name, ects and score
-			foreach (KeyValuePair<Course, Tuple<int, int>> entry in gradesPerActivity) {
-				bulletin += entry.Key.Code + " " + entry.Key.Name + " " + entry.Key.ECTS + " " + entry.Value.Item1 / entry.Value.Item2 + "\n";
+			foreach (KeyValuePair<Course, List<Grade>> course in this.grades) {
+				var avarage = course.Value.Average(grade => grade.Points());
+				bulletin += course.Key.Code + "\t" + course.Key.Name + "\t" + course.Key.ECTS + "\t" + avarage + "%\n";
 			}
 
 			bulletin += "\n\n";

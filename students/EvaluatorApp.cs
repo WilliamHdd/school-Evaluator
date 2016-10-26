@@ -41,7 +41,7 @@ namespace Evaluator
 
 			student_menu
 				.add_option("List students", EvaluatorApp.ListStudents)
-				.add_option("Grades of student", EvaluatorApp.Dummy)
+				.add_option("Grades of student", EvaluatorApp.ShowGradesOfStudent)
 				.add_option("Add student", EvaluatorApp.AddStudent)
 				.add_option("Remove student", EvaluatorApp.RemoveStudent);
 
@@ -161,6 +161,24 @@ namespace Evaluator
 			return true;
 		}
 
+		private static bool ShowGradesOfStudent() {
+			Console.Write("Last name: ");
+			var last_name = Console.ReadLine();
+			Console.Write("First name: ");
+			var first_name = Console.ReadLine();
+
+			var student = new Student(last_name, first_name);
+
+			if (!EvaluatorApp.establishment.get_student(student)) {
+				Console.WriteLine("\nStudent \"" + student + "\" could not be found...");
+				return true;
+			}
+
+			Console.WriteLine(student.Bulletin());
+
+			return true;
+		}
+
 
 		private static bool AddTeacher() {
 			Console.Write("Last name: ");
@@ -193,6 +211,7 @@ namespace Evaluator
 			return true;
 		}
 
+
 		private static bool RemoveTeacher() {
 			Console.Write("Last name: ");
 			var last_name = Console.ReadLine();
@@ -218,8 +237,7 @@ namespace Evaluator
 
 			return true;
 		}
-
-
+			
 		private static bool AddCourse() {
 
 			Console.Write("Name: ");
@@ -270,7 +288,6 @@ namespace Evaluator
 				}
 			}
 
-
 			return true;
 		}
 		private static bool RemoveCourse() {
@@ -304,7 +321,6 @@ namespace Evaluator
 			}
 			return true;
 		}
-	
 
 		private static bool Exit() {
 			EvaluatorApp.run = false;

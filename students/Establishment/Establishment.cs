@@ -16,28 +16,41 @@ namespace Evaluator
 	[Serializable]
 	public class Establishment
 	{
-		private string name;
+		public string Name { get; set; }
 
-		private HashSet<Student> students;
+		// You can't retrieve a value in a HashSet, that's why we use a dictionary here.
+		// The key will be a hash of the last and first name of the student, while the value
+		// will store the whole students with grades and all
+		private Dictionary<Student, Student> students;
 		private Dictionary<Teacher,Teacher> teachers;
 		private Dictionary<string, Course> courses;
 
 		public Establishment(string name) {
-			this.name = name;
+			this.Name = name;
 
-			this.students = new HashSet<Student>();
+			this.students = new Dictionary<Student, Student>();
 			this.teachers = new Dictionary<Teacher, Teacher>();
 			this.courses = new Dictionary<string, Course>();
+
 		}
 
 		// Tries to add a student to the establishment
 		// returns false if the student is already present
 		public bool add_student(Student s) {
-			return this.students.Add(s);
+			if (this.students.ContainsKey(s)) {
+				return false;
+			}
+
+			this.students.Add(s, s);
+			return true;
 		}
 
 		public bool remove_student(Student s) {
 			return this.students.Remove(s);
+		}
+
+		public bool get_student(Student s) {
+			return this.students.TryGetValue(s, out s);
 		}
 
 		// Tries to add a teacher to the establishment
@@ -81,7 +94,7 @@ namespace Evaluator
 
 		// Copies the students to an array and returns the array
 		public Student[] get_list_of_students() {
-			return this.students.ToArray<Student>();
+			return this.students.Select(kv => kv.Value).ToArray<Student>();
 		}
 
 		// Copies the students to an array and returns the array
@@ -92,6 +105,10 @@ namespace Evaluator
 		// Copies the students to an array and returns the array
 		public Course[] get_list_of_courses() {
 			return this.courses.Select(kv => kv.Value).ToArray<Course>();
+		}
+
+		public bool contains_student(Student s) {
+			return this.students.ContainsKey(s);
 		}
 
 		// Imports all the data from a file
