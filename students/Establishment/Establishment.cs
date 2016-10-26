@@ -49,7 +49,7 @@ namespace Evaluator
 			return this.students.Remove(s);
 		}
 
-		public bool get_student(Student s) {
+		public bool get_student(ref Student s) {
 			return this.students.TryGetValue(s, out s);
 		}
 
@@ -68,7 +68,7 @@ namespace Evaluator
 			return this.teachers.Remove(t);
 		}
 
-		public bool get_teacher(Teacher t) {
+		public bool get_teacher(ref Teacher t) {
 			return this.teachers.TryGetValue(t, out t);
 		}
 
@@ -89,6 +89,10 @@ namespace Evaluator
 
 		public bool remove_course(string code) {
 			return this.courses.Remove(code);
+		}
+
+		public bool get_course(string code, out Course course) {
+			return this.courses.TryGetValue(code, out course);
 		}
 
 

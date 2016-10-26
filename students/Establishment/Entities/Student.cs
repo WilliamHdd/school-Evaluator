@@ -35,7 +35,9 @@ namespace Evaluator.Entities
 		// Constructs a string representing the average score for each activity of the student
 		public string Bulletin() {
 
-			var bulletin = "\nRapport: " + this + "\n\n"; 
+			var bulletin = "\nRapport: " + this + "\n\n";
+
+            Console.WriteLine("Number of courses: " + this.grades.Count);
 
 			// And a line for every activity with the code, name, ects and score
 			foreach (KeyValuePair<Course, List<Grade>> course in this.grades) {
