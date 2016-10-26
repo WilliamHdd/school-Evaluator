@@ -25,13 +25,15 @@ namespace Evaluator
 			Menu init_menu = new Menu();
 
 			init_menu
-				.add_option("Create new", EvaluatorApp.NewEstablishment)
-				.add_option("Import", EvaluatorApp.ImportEstablishment);
+				.set_title("Welcome, would you like to create a new establishment or import existing data?")
+				.add_option("Create new", EvaluatorApp.NewEstablishment, false)
+				.add_option("Import", EvaluatorApp.ImportEstablishment, false);
 
 			init_menu.Run();
 		}
 
 		private static void MainMenu() {
+			Console.Clear();
 			Console.WriteLine("\nWhat would you like to do?\n");
 
 			Menu main_menu = new Menu();
@@ -40,29 +42,36 @@ namespace Evaluator
 			Menu course_menu = new Menu();
 
 			student_menu
+				.set_title("What would you like to do?")
 				.add_option("List students", EvaluatorApp.ListStudents)
 				.add_option("Grades of student", EvaluatorApp.ShowGradesOfStudent)
 				.add_option("Add student", EvaluatorApp.AddStudent)
-				.add_option("Remove student", EvaluatorApp.RemoveStudent);
+				.add_option("Remove student", EvaluatorApp.RemoveStudent)
+				.add_option("Back...", () => true, false);
 
 			teacher_menu
+				.set_title("What would you like to do?")
 				.add_option("List teachers", EvaluatorApp.ListTeacher)
 				.add_option("Add teacher", EvaluatorApp.AddTeacher)
-				.add_option("Remove teacher", EvaluatorApp.RemoveTeacher);
+				.add_option("Remove teacher", EvaluatorApp.RemoveTeacher)
+				.add_option("Back...", () => true, false);
 
 			course_menu
+				.set_title("What would you like to do?")
 				.add_option("List courses", EvaluatorApp.ListCourse)
 				.add_option("Add course", EvaluatorApp.AddCourse)
 				.add_option("Remove course", EvaluatorApp.RemoveCourse)
 				.add_option("Students signed up for a course", EvaluatorApp.Dummy)
-				.add_option("Statistics for a course", EvaluatorApp.Dummy);
+				.add_option("Statistics for a course", EvaluatorApp.Dummy)
+				.add_option("Back...", () => true, false);
 
-			main_menu
-				.add_option("Manage students", student_menu.Run)
-				.add_option("Manage teachers", teacher_menu.Run)
-				.add_option("Manage courses", course_menu.Run)
+			main_menu.set_title("Welcome, would you like to create a new establishment or import existing data?").set_title("Welcome, would you like to create a new establishment or import existing data?")
+				.set_title("What would you like to do?")
+				.add_option("Manage students", student_menu.Run, false)
+				.add_option("Manage teachers", teacher_menu.Run, false)
+				.add_option("Manage courses", course_menu.Run, false)
 				.add_option("Export data", EvaluatorApp.ExportEstablishment)
-				.add_option("Exit", EvaluatorApp.Exit);
+				.add_option("Exit", EvaluatorApp.Exit, false);
 
 			main_menu.Run();
 		}
