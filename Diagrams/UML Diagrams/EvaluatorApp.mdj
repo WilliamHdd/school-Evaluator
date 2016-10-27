@@ -8458,6 +8458,53 @@
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
 					"name": "Dictionnary<Course, List<Grade>>",
+					"ownedElements": [
+						{
+							"_type": "UMLAssociation",
+							"_id": "AAAAAAFYBjO0WgXzUKY=",
+							"_parent": {
+								"$ref": "AAAAAAFYBY+uk5PcUm8="
+							},
+							"end1": {
+								"_type": "UMLAssociationEnd",
+								"_id": "AAAAAAFYBjO0WwX01hQ=",
+								"_parent": {
+									"$ref": "AAAAAAFYBjO0WgXzUKY="
+								},
+								"reference": {
+									"$ref": "AAAAAAFYBY+uk5PcUm8="
+								},
+								"visibility": "public",
+								"navigable": true,
+								"aggregation": "none",
+								"isReadOnly": false,
+								"isOrdered": false,
+								"isUnique": false,
+								"isDerived": false,
+								"isID": false
+							},
+							"end2": {
+								"_type": "UMLAssociationEnd",
+								"_id": "AAAAAAFYBjO0WwX1wBA=",
+								"_parent": {
+									"$ref": "AAAAAAFYBjO0WgXzUKY="
+								},
+								"reference": {
+									"$ref": "AAAAAAFYBUWVHUZV478="
+								},
+								"visibility": "public",
+								"navigable": true,
+								"aggregation": "composite",
+								"isReadOnly": false,
+								"isOrdered": false,
+								"isUnique": false,
+								"isDerived": false,
+								"isID": false
+							},
+							"visibility": "public",
+							"isDerived": false
+						}
+					],
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
