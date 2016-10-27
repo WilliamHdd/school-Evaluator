@@ -6,7 +6,7 @@ using Evaluator.Activities;
 
 namespace Evaluator
 {
-	public class EvaluatorApp
+	public static class EvaluatorApp
 	{
 		static private Establishment establishment;
 		static private bool run = true;
