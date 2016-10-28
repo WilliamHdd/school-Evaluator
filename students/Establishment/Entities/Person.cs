@@ -37,7 +37,8 @@ namespace Evaluator.Entities
 				return this.FirstName == personObj.FirstName && this.LastName == personObj.LastName;
 			}
 		}
-
+		/*Sets an unique HashCode to a person. 
+		Permits to have different person with same name or whatever and still be different.*/
 		public override int GetHashCode() {
 			int hash = 13;
 			hash = (hash * 7) + this.LastName.GetHashCode();

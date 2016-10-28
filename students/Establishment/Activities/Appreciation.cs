@@ -9,6 +9,7 @@ namespace Evaluator.Activities
 	[Serializable]
 	public class LetterGrade : Grade
 	{
+		//Converts a string grade into an int grade.
 		public LetterGrade(string letter_grade) : base(0, 100) {
 			switch (letter_grade) {
 				case "A+":

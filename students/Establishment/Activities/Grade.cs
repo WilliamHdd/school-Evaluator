@@ -11,6 +11,7 @@ namespace Evaluator.Activities
 	{
         protected double points;
 
+		//Compares a grade to max grade and sets it on 100.
 		public Grade (double points, double max) {
 			if (points < 0 || max < 1 || max < points) {
                 throw new ArgumentException();

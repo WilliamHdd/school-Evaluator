@@ -32,6 +32,9 @@ namespace Evaluator
 			init_menu.Run();
 		}
 
+
+		/* Static function MainMenu() permits to create easily the menu's you want. See link report for further explenations
+		 on how it works.*/
 		private static void MainMenu() {
 			Console.Clear();
 			Console.WriteLine("\nWhat would you like to do?\n");
@@ -77,6 +80,8 @@ namespace Evaluator
 			main_menu.Run();
 		}
 
+
+		/* Here are all the functions used in the menus. */
 		private static bool NewEstablishment() {
 			Console.WriteLine("What is the establishments name?");
 			string name = Console.ReadLine();

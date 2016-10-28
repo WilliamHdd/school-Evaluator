@@ -25,6 +25,8 @@ namespace Evaluator.Activities
 			this.ECTS = ects;
 			this.Teacher = teacher;
 		}
+
+		//Returns all needed informations about a course as a string.
 		public override string ToString() {
 			return this.Name + " [" +this.Code + "] given by " + this.Teacher + " (" + this.ECTS + " ects) ";
 		}
@@ -38,6 +40,8 @@ namespace Evaluator.Activities
 			}
 		}
 
+		/*Sets an unique HashCode to a course. 
+		Permits to have different courses with same name or whatever and still be different.*/
 		public override int GetHashCode() {
 			int hash = 13;
 			hash = (hash * 7) + this.Name.GetHashCode();
